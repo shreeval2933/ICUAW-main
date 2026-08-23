@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 210 40% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 40% 11%;
+    
+    --primary: 199 89% 38%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 199 30% 94%;
+    --secondary-foreground: 199 89% 28%;
+    
+    --muted: 210 20% 96%;
+    --muted-foreground: 210 15% 45%;
+    --accent: 172 66% 40%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --success: 142 71% 40%;
+    --success-foreground: 0 0% 100%;
+    
+    --radius: 0.625rem;
+    
+    --sidebar-background: 199 89% 20%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-accent: 199 60% 30%;
+    --sidebar-accent-foreground: 0 0% 98%;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    @apply bg-slate-50 text-slate-900 antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Source Sans 3', sans-serif;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2;
+  }
+  .form-section {
+    @apply bg-white rounded-lg border border-slate-200 p-5 shadow-sm;
+  }
+  .stat-card {
+    @apply bg-white rounded-lg p-4 border border-slate-200 shadow-sm flex flex-col justify-between;
+  }
+  .badge-critical {
+    @apply bg-red-50 text-red-700 border border-red-200 px-2 py-1 rounded text-xs font-semibold;
+  }
+  .badge-normal {
+    @apply bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-1 rounded text-xs font-semibold;
+  }
+  .badge-warning {
+    @apply bg-amber-50 text-amber-700 border border-amber-200 px-2 py-1 rounded text-xs font-semibold;
+  }
+
+  /* Responsive layout setups */
+  .grid-responsive {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+}
+
+/* Micro-animations */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Light theme overrides */
+.light {
+  background-color: #f8fafc !important;
+  color: #334155 !important;
+}
+.light .bg-\[\#070f15\] {
+  background-color: #f8fafc !important;
+}
+.light .bg-\[\#0f1b26\] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05) !important;
+}
+.light .bg-\[\#0b131a\] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+.light .bg-\[\#0a131a\] {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+.light .text-white {
+  color: #0f172a !important;
+}
+.light .text-\[\#e2e8f0\] {
+  color: #334155 !important;
+}
+.light .text-\[\#94a3b8\] {
+  color: #475569 !important;
+}
+.light .text-\[\#64748b\] {
+  color: #64748b !important;
+}
+.light .border-\[\#1e2e3d\] {
+  border-color: #cbd5e1 !important;
+}
+.light .border-\[\#1e2e3d\]\/60 {
+  border-color: rgba(203, 213, 225, 0.6) !important;
+}
+.light .border-\[\#1e2e3d\]\/40 {
+  border-color: rgba(203, 213, 225, 0.4) !important;
+}
+.light .divide-\[\#1e2e3d\]\/40 > * + * {
+  border-color: rgba(203, 213, 225, 0.4) !important;
+}
+.light .bg-\[\#132839\] {
+  background-color: #e0f2fe !important;
+}
+.light .bg-\[\#132230\] {
+  background-color: #e2e8f0 !important;
+}
+.light select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+.light select {
+  color: #0f172a !important;
+}
+.light input {
+  color: #0f172a !important;
+}
+.light input::placeholder {
+  color: #94a3b8 !important;
+}
+.light .hover\:bg-\[\#132230\]\/35:hover {
+  background-color: #f1f5f9 !important;
+}
+
+/* Override browser default autofill white background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #ffffff !important;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px #0a131a !important;
+}
+
+/* Light mode autocomplete fallback */
+.light input:-webkit-autofill,
+.light input:-webkit-autofill:hover, 
+.light input:-webkit-autofill:focus, 
+.light input:-webkit-autofill:active {
+  -webkit-text-fill-color: #0f172a !important;
+  box-shadow: inset 0 0 20px 20px #f1f5f9 !important;
+}
+
+
