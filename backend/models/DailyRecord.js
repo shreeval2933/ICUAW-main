@@ -55,7 +55,10 @@ const DailyRecord = sequelize.define('DailyRecord', {
     type: DataTypes.ENUM('oral', 'ryles tube', 'TPN'),
     defaultValue: 'oral'
   },
-  proteinIntake: { type: DataTypes.FLOAT }
+  proteinIntake: { type: DataTypes.FLOAT },
+
+  // Tab 5: ICUAW
+  handgripStrength: { type: DataTypes.FLOAT }
 });
 
 export default DailyRecord;

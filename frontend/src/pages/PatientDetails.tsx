@@ -109,6 +109,7 @@ export default function PatientDetails() {
       'Immobilization Duration (hrs)': d.immobilizationDuration ?? '',
       'Nutrition Route': d.nutritionRoute ?? '',
       'Protein Intake (gm/day)': d.proteinIntake ?? '',
+      'Handgrip Strength (unit-kg force)': d.handgripStrength ?? '',
     }));
 
     // Sheet 3: Lab value entries for this patient
@@ -384,8 +385,13 @@ export default function PatientDetails() {
                   </div>
                   <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
                     <span className="px-2 py-0.5 bg-[#142332] text-[#94a3b8] rounded text-[10px] font-bold">
-                      SOFA: {record.sofaScore || 'N/A'}
+                      SOFA: {record.sofaScore ?? 'N/A'}
                     </span>
+                    {record.handgripStrength != null && (
+                      <span className="px-2 py-0.5 bg-[#132839] text-[#0ba5e9] rounded text-[10px] font-bold">
+                        HGS: {record.handgripStrength} kgf
+                      </span>
+                    )}
                     <button 
                       onClick={() => navigate(`/daily-record/${record.id}`)}
                       className="px-3 py-1 border border-[#1e2e3d] text-[#e2e8f0] text-[10px] font-bold rounded-lg hover:bg-[#132230] transition"

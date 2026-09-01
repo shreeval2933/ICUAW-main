@@ -14,7 +14,7 @@ export default function DailyEntry() {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [selectedPatientId, setSelectedPatientId] = useState('');
   const [entryDate, setEntryDate] = useState(new Date().toISOString().split('T')[0]);
-  const [activeTab, setActiveTab] = useState<'vitals' | 'treatment' | 'practices' | 'nutrition'>('vitals');
+  const [activeTab, setActiveTab] = useState<'vitals' | 'treatment' | 'practices' | 'nutrition' | 'icuaw'>('vitals');
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
@@ -52,6 +52,10 @@ export default function DailyEntry() {
   const [nutrition, setNutrition] = useState({
     nutritionRoute: 'oral',
     proteinIntake: '',
+  });
+
+  const [icuaw, setIcuaw] = useState({
+    handgripStrength: '',
   });
 
   useEffect(() => {
@@ -122,6 +126,9 @@ export default function DailyEntry() {
         // Tab 4: Nutrition
         nutritionRoute: nutrition.nutritionRoute,
         proteinIntake: nutrition.proteinIntake ? parseFloat(nutrition.proteinIntake) : undefined,
+
+        // Tab 5: ICUAW
+        handgripStrength: icuaw.handgripStrength ? parseFloat(icuaw.handgripStrength) : undefined,
       };
 
       await axios.post(`/api/patients/${selectedPatientId}/daily-record`, data);
@@ -138,6 +145,7 @@ export default function DailyEntry() {
     { id: 'treatment', label: 'TREATMENT VARIABLES' },
     { id: 'practices', label: 'ICU PRACTICES' },
     { id: 'nutrition', label: 'NUTRITION' },
+    { id: 'icuaw', label: 'ICUAW' },
   ] as const;
 
   return (
@@ -445,6 +453,27 @@ export default function DailyEntry() {
                   placeholder="gm/day"
                   value={nutrition.proteinIntake}
                   onChange={(e) => setNutrition({ ...nutrition, proteinIntake: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-[#070f15] border border-[#1e2e3d] rounded-lg text-white text-xs focus:outline-none focus:ring-1 focus:ring-[#0ba5e9]"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 5: ICUAW */}
+        {activeTab === 'icuaw' && (
+          <div className="space-y-6 animate-fade-in">
+            <h3 className="text-base font-bold text-white border-b border-[#1e2e3d]/40 pb-2">ICUAW</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="bg-[#0a131a] p-4 rounded-xl border border-[#1e2e3d]/60 space-y-1">
+                <label className="block text-xs font-bold text-white">Handgrip strength (unit-kg force)</label>
+                <input
+                  type="number"
+                  step="any"
+                  placeholder="kg force"
+                  value={icuaw.handgripStrength}
+                  onChange={(e) => setIcuaw({ ...icuaw, handgripStrength: e.target.value })}
                   className="w-full px-3.5 py-2.5 bg-[#070f15] border border-[#1e2e3d] rounded-lg text-white text-xs focus:outline-none focus:ring-1 focus:ring-[#0ba5e9]"
                 />
               </div>

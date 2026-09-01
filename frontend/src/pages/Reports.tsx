@@ -110,6 +110,7 @@ export default function Reports() {
             'Immobilization Duration (hrs)': d.immobilizationDuration ?? '',
             'Nutrition Route': d.nutritionRoute ?? '',
             'Protein Intake (gm/day)': d.proteinIntake ?? '',
+            'Handgrip Strength (unit-kg force)': d.handgripStrength ?? '',
           });
         });
       }

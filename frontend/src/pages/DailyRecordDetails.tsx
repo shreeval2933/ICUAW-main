@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Activity, ShieldAlert, Sparkles, ClipboardCheck } from 'lucide-react';
+import { ArrowLeft, Activity, ShieldAlert, Sparkles, ClipboardCheck, Dumbbell } from 'lucide-react';
 import axios from 'axios';
 
 export default function DailyRecordDetails() {
@@ -8,7 +8,7 @@ export default function DailyRecordDetails() {
   const navigate = useNavigate();
   const [record, setRecord] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'vitals' | 'treatment' | 'practices' | 'nutrition'>('vitals');
+  const [activeTab, setActiveTab] = useState<'vitals' | 'treatment' | 'practices' | 'nutrition' | 'icuaw'>('vitals');
 
   useEffect(() => {
     async function loadRecord() {
@@ -58,6 +58,7 @@ export default function DailyRecordDetails() {
     { id: 'treatment', label: 'TREATMENT VARIABLES' },
     { id: 'practices', label: 'ICU PRACTICES' },
     { id: 'nutrition', label: 'NUTRITION' },
+    { id: 'icuaw', label: 'ICUAW' },
   ] as const;
 
   return (
@@ -246,6 +247,21 @@ export default function DailyRecordDetails() {
               <div className="flex justify-between border-b border-[#1e2e3d]/20 pb-2">
                 <span className="text-[#64748b]">Daily Protein Intake</span>
                 <span className="text-white font-bold">{record.proteinIntake ? `${record.proteinIntake} gm/day` : 'N/A'}</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab 5: ICUAW */}
+        {activeTab === 'icuaw' && (
+          <div className="space-y-4 animate-fade-in text-xs font-semibold">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2 border-b border-[#1e2e3d]/40 pb-2">
+              <Dumbbell className="h-4 w-4 text-[#0ba5e9]" /> ICUAW
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+              <div className="flex justify-between border-b border-[#1e2e3d]/20 pb-2">
+                <span className="text-[#64748b]">Handgrip strength (unit-kg force)</span>
+                <span className="text-white font-bold">{record.handgripStrength != null ? `${record.handgripStrength} kg force` : 'N/A'}</span>
               </div>
             </div>
           </div>
